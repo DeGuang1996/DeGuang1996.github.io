@@ -6,21 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>Archives: 2019/6 | DeGuang的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成的很快的话(可以for循环测试)为此，需要引入C++11中的random文件，其中封装了很多优秀的随">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://yoursite.com/2019/05/26/Test/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成的很快的话(可以for循环测试)为此，需要引入C++11中的random文件，其中封装了很多优秀的随">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-05-26T11:21:21.670Z">
+  <meta name="description" content="华中科技大学2018级计算机渣硕，找工作中">
+<meta name="keywords" content="找工作">
+<meta property="og:type" content="website">
+<meta property="og:title" content="DeGuang的博客">
+<meta property="og:url" content="http://yoursite.com/archives/2019/06/index.html">
+<meta property="og:site_name" content="DeGuang的博客">
+<meta property="og:description" content="华中科技大学2018级计算机渣硕，找工作中">
+<meta property="og:locale" content="C++,Java,Python">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
-<meta name="twitter:description" content="程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成的很快的话(可以for循环测试)为此，需要引入C++11中的random文件，其中封装了很多优秀的随">
+<meta name="twitter:title" content="DeGuang的博客">
+<meta name="twitter:description" content="华中科技大学2018级计算机渣硕，找工作中">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="DeGuang的博客" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -52,6 +52,8 @@
 		<hgroup>
 		  <h1 class="header-author"><a href="/">DeGuang1996</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">幻梦终醒，不悔华年</p>
 		
 
 		<nav class="header-menu">
@@ -111,6 +113,8 @@
 			  <h1 class="header-author js-header-author">DeGuang1996</h1>
 			</hgroup>
 			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>幻梦终醒，不悔华年<i class="icon icon-quo-right"></i></p>
+			
 			
 			
 				
@@ -154,144 +158,64 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-Test" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
+            
+  
+  
     
-    <div class="article-entry" itemprop="articleBody">
+    
       
-        <p>程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：<br>生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字<br>单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成的很快的话(可以for循环测试)<br>为此，需要引入C++11中的random文件，其中封装了很多优秀的随机数生成器，包括均匀分布、正态分布、泊松分布等。</p>
-<p>就拿围棋中用得最多的mt19937为例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::random_device rd;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::mt19937&gt; mtEngine;</span><br><span class="line"><span class="keyword">this</span>-&gt;mtEngine = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::mt19937&gt;(rd());</span><br><span class="line">(*mtEngine)();</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConsoleApplication4.cpp : 定义控制台应用程序的入口点。</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Random</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> maxRand = <span class="built_in">std</span>::random_device::max();</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Random&amp; <span class="title">getInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> Random instance;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">getInteger</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (*dist)(rd);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">GetMTEngineInteger</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (*mtEngine)();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">uint64_t</span> GetMTEngine64Integer() <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (*mtEngine64)();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">GetRand0Integer</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (*rand0Engine)();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    auto GetRanlux48Integer() noexcept -&gt;decltype(auto) &#123;</span><br><span class="line">        <span class="keyword">return</span> (*ranlux48Engine)();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Random() <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        mtEngine = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::mt19937&gt;(rd());</span><br><span class="line">        mtEngine64 = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::mt19937_64&gt;(rd());</span><br><span class="line">        dist = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::uniform_int_distribution&lt; <span class="keyword">unsigned</span> <span class="keyword">int</span> &gt;&gt;(<span class="built_in">std</span>::uniform_int_distribution&lt; <span class="keyword">unsigned</span> <span class="keyword">int</span> &gt;(<span class="number">0</span>, maxRand));</span><br><span class="line">        rand0Engine = make_shared&lt;<span class="built_in">std</span>::minstd_rand0&gt;(rd());</span><br><span class="line">        ranlux48Engine = make_shared&lt;<span class="built_in">std</span>::ranlux48&gt;(rd());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::random_device rd;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::mt19937&gt; mtEngine; <span class="comment">//32-bit Mersenne Twister by Matsumoto and Nishimura, 1998</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::mt19937_64&gt; mtEngine64; <span class="comment">//64-bit Mersenne Twister by Matsumoto and Nishimura, 2000(马特赛特旋转演算法)</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::minstd_rand0&gt; rand0Engine;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::ranlux48&gt; ranlux48Engine;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::uniform_int_distribution&lt; <span class="keyword">unsigned</span> <span class="keyword">int</span> &gt; &gt; dist;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetMTEngineInteger() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetMTEngine64Integer() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetRand0Integer() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetRanlux48Integer() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().getInteger() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>另外random中还有一堆分布函数，感觉是从matlab移植过来的，需要的话可以参考cppreference或者下面这篇文章：<br><a href="https://zh.cppreference.com/w/cpp/header/random" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/header/random</a><br><a href="https://blog.csdn.net/u010487568/article/details/51526337" target="_blank" rel="noopener">https://blog.csdn.net/u010487568/article/details/51526337</a></p>
-
       
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2019" class="archive-year">2019</a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/06/03/卡特兰数/" class="archive-article-date">
+  	<time datetime="2019-06-03T08:13:41.925Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-03</time>
+</a>
         </div>
-      </div>
-    </span>
-  </div>
-</div>
+    	 
+        <div class="article-info info-on-right">
+          
+          
 
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2019/05/26/Test/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
   
-<nav id="article-nav">
-  
-  
-    <a href="/2019/05/26/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">Hello World</div>
-      <i class="icon-circle-right"></i>
-    </a>
-  
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+    
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2019/06/03/C++ 随机数引擎(C++ 11)/" class="archive-article-date">
+  	<time datetime="2019-06-03T08:06:39.670Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-06-03</time>
+</a>
         </div>
-        
-        
-    </div>
-</aside>
+    	 
+        <div class="article-info info-on-right">
+          
+          
 
-
-
+        </div>
+        <div class="clearfix"></div>
+    </header>
+  </div>
+</article>
   
   
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -314,8 +238,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
