@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=7.1.2">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成的很快的话(可以for循环测试)为此，需要引入C++11中的random文件，其中封装了很多优秀的随">
+<meta name="keywords" content="找工作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++ 随机数引擎(C++ 11)">
+<meta property="og:url" content="https://DeGuang1996.github.io/2019/06/08/C-随机数引擎-C-11/index.html">
+<meta property="og:site_name" content="DeGuang的博客">
+<meta property="og:description" content="程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成的很快的话(可以for循环测试)为此，需要引入C++11中的random文件，其中封装了很多优秀的随">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-06-08T07:11:41.248Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="C++ 随机数引擎(C++ 11)">
+<meta name="twitter:description" content="程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成的很快的话(可以for循环测试)为此，需要引入C++11中的random文件，其中封装了很多优秀的随">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="https://DeGuang1996.github.io/2019/06/08/C-随机数引擎-C-11/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>C++ 随机数引擎(C++ 11) | DeGuang的博客</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">DeGuang的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">幻梦终醒，不悔华年</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Navigationsleiste an/ausschalten">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Startseite</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archiv</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://DeGuang1996.github.io/2019/06/08/C-随机数引擎-C-11/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="DeGuang1996">
+      <meta itemprop="description" content="华中科技大学2018级计算机渣硕，找工作中">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="DeGuang的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">C++ 随机数引擎(C++ 11)
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+
+              
+                
+              
+
+              <time title="Erstellt: 2019-06-08 15:11:15 / Geändert am: 15:11:41" itemprop="dateCreated datePublished" datetime="2019-06-08T15:11:15+08:00">2019-06-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：<br>生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字<br>单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成的很快的话(可以for循环测试)<br>为此，需要引入C++11中的random文件，其中封装了很多优秀的随机数生成器，包括均匀分布、正态分布、泊松分布等。</p>
+<p>就拿围棋中用得最多的mt19937为例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::random_device rd;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::mt19937&gt; mtEngine;</span><br><span class="line"><span class="keyword">this</span>-&gt;mtEngine = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::mt19937&gt;(rd());</span><br><span class="line">(*mtEngine)();</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConsoleApplication4.cpp : 定义控制台应用程序的入口点。</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Random</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> maxRand = <span class="built_in">std</span>::random_device::max();</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Random&amp; <span class="title">getInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> Random instance;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">getInteger</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (*dist)(rd);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">GetMTEngineInteger</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (*mtEngine)();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">uint64_t</span> GetMTEngine64Integer() <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (*mtEngine64)();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">GetRand0Integer</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (*rand0Engine)();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    auto GetRanlux48Integer() noexcept -&gt;decltype(auto) &#123;</span><br><span class="line">        <span class="keyword">return</span> (*ranlux48Engine)();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Random() <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        mtEngine = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::mt19937&gt;(rd());</span><br><span class="line">        mtEngine64 = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::mt19937_64&gt;(rd());</span><br><span class="line">        dist = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::uniform_int_distribution&lt; <span class="keyword">unsigned</span> <span class="keyword">int</span> &gt;&gt;(<span class="built_in">std</span>::uniform_int_distribution&lt; <span class="keyword">unsigned</span> <span class="keyword">int</span> &gt;(<span class="number">0</span>, maxRand));</span><br><span class="line">        rand0Engine = make_shared&lt;<span class="built_in">std</span>::minstd_rand0&gt;(rd());</span><br><span class="line">        ranlux48Engine = make_shared&lt;<span class="built_in">std</span>::ranlux48&gt;(rd());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::random_device rd;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::mt19937&gt; mtEngine; <span class="comment">//32-bit Mersenne Twister by Matsumoto and Nishimura, 1998</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::mt19937_64&gt; mtEngine64; <span class="comment">//64-bit Mersenne Twister by Matsumoto and Nishimura, 2000(马特赛特旋转演算法)</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::minstd_rand0&gt; rand0Engine;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::ranlux48&gt; ranlux48Engine;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::uniform_int_distribution&lt; <span class="keyword">unsigned</span> <span class="keyword">int</span> &gt; &gt; dist;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetMTEngineInteger() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetMTEngine64Integer() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetRand0Integer() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetRanlux48Integer() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().getInteger() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>另外random中还有一堆分布函数，感觉是从matlab移植过来的，需要的话可以参考cppreference或者下面这篇文章：<br><a href="https://zh.cppreference.com/w/cpp/header/random" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/header/random</a><br><a href="https://blog.csdn.net/u010487568/article/details/51526337" target="_blank" rel="noopener">https://blog.csdn.net/u010487568/article/details/51526337</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/06/08/卡特兰数/" rel="prev" title="卡特兰数">
+                卡特兰数 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">DeGuang1996</p>
+              <div class="site-description motion-element" itemprop="description">华中科技大学2018级计算机渣硕，找工作中</div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">Artikel</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+
+      
+
+    </div>
+  </aside>
+  
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DeGuang1996</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">Erstellt mit  <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Design – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.1.2"></script>
+
+  <script src="/js/motion.js?v=7.1.2"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.1.2"></script>
+<script src="/js/post-details.js?v=7.1.2"></script>
+
+
+
+  
+
+
+  <script src="/js/next-boot.js?v=7.1.2"></script>
+
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
