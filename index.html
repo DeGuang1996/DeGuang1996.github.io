@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -52,10 +52,10 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.1.2">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.1.2">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.ico?v=7.1.2">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.1.2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.ico?v=7.1.2">
 
 
   <link rel="mask-icon" href="/images/logo.svg?v=7.1.2" color="#222">
@@ -70,9 +70,9 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '7.1.2',
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false,"dimmer":false},
+    sidebar: {"position":"left","width":300,"display":"post","offset":12,"onmobile":false,"dimmer":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -172,7 +172,7 @@
     
   
 
-  <div class="container sidebar-position-right 
+  <div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -290,14 +290,40 @@
 
       
       
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
+        </li>
+      
     </ul>
   
 
   
-    
 
   
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
 
+
+
+    </div>
   
 </nav>
 
@@ -316,6 +342,9 @@
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
+            
+
           
           <div id="content" class="content">
             
@@ -381,7 +410,7 @@
                 
               
 
-              <time title="创建时间：2019-06-08 15:11:59 / 修改时间：07:12:11" itemprop="dateCreated datePublished" datetime="2019-06-08T15:11:59Z">2019-06-08</time>
+              <time title="创建时间：2019-06-08 15:11:59 / 修改时间：08:28:40" itemprop="dateCreated datePublished" datetime="2019-06-08T15:11:59Z">2019-06-08</time>
             
 
             
@@ -395,6 +424,19 @@
 
           
             
+            
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/08/卡特兰数/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/08/卡特兰数/" itemprop="commentCount"></span>
+                </a>
+              </span>
             
           
 
@@ -422,22 +464,21 @@
       
         
           
-            <p>Catalan序列是一个整数序列，其通项公式是</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h(n)=C(<span class="number">2</span>n,n)/(n+<span class="number">1</span>) (n=<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,...)</span><br></pre></td></tr></table></figure>
-<p>其前几项为 : 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440, 9694845, 35357670, 129644790, 477638700, 1767263190, 6564120420, 24466267020, 91482563640, 343059613650, 1289904147324, 4861946401452<br>令h(0)=1,h(1)=1，catalan数满足递推式[1]：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">h(n)= h(<span class="number">0</span>)*h(n<span class="number">-1</span>)+h(<span class="number">1</span>)*h(n<span class="number">-2</span>) + ... + h(n<span class="number">-1</span>)h(<span class="number">0</span>) (n&gt;=<span class="number">2</span>)</span><br><span class="line">例如：h(<span class="number">2</span>)=h(<span class="number">0</span>)*h(<span class="number">1</span>)+h(<span class="number">1</span>)*h(<span class="number">0</span>)=<span class="number">1</span>*<span class="number">1</span>+<span class="number">1</span>*<span class="number">1</span>=<span class="number">2</span></span><br><span class="line">h(<span class="number">3</span>)=h(<span class="number">0</span>)*h(<span class="number">2</span>)+h(<span class="number">1</span>)*h(<span class="number">1</span>)+h(<span class="number">2</span>)*h(<span class="number">0</span>)=<span class="number">1</span>*<span class="number">2</span>+<span class="number">1</span>*<span class="number">1</span>+<span class="number">2</span>*<span class="number">1</span>=<span class="number">5</span></span><br></pre></td></tr></table></figure>
-<p>另类递推式[2]：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h(n)=h(n<span class="number">-1</span>)*(<span class="number">4</span>*n<span class="number">-2</span>)/(n+<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
-<p>递推关系的解为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h(n)=C(<span class="number">2</span>n,n)/(n+<span class="number">1</span>) (n=<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,...)</span><br></pre></td></tr></table></figure>
-<p>递推关系的另类解为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h(n)=c(<span class="number">2</span>n,n)-c(<span class="number">2</span>n,n+<span class="number">1</span>)(n=<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,...)</span><br></pre></td></tr></table></figure>
-<p>常见问题：</p>
-<h3 id="出栈次序问题"><a href="#出栈次序问题" class="headerlink" title="出栈次序问题"></a>出栈次序问题</h3><h3 id="买票找零"><a href="#买票找零" class="headerlink" title="买票找零"></a>买票找零</h3><h3 id="将多边行划分为三角形问题"><a href="#将多边行划分为三角形问题" class="headerlink" title="将多边行划分为三角形问题"></a>将多边行划分为三角形问题</h3><p>一些笔试题<br>1、16个人按顺序去买烧饼，其中8个人每人身上只有一张5块钱，另外8个人每人身上只有一张10块钱。烧饼5块一个，开始时烧饼店老板身上没有钱。16个顾客互相不通气，每人只买一个。问这16个人共有多少种排列方法能避免找不开钱的情况出现。<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h(<span class="number">8</span>)=<span class="number">16</span>!/(<span class="number">8</span>!*<span class="number">9</span>!)=<span class="number">1430</span>，所以总数=h(<span class="number">8</span>)*<span class="number">8</span>！*<span class="number">8</span>！=<span class="number">16</span>!/<span class="number">9</span></span><br></pre></td></tr></table></figure></p>
-<p>2、在图书馆一共6个人在排队，3个还《面试宝典》一书，3个在借《面试宝典》一书，图书馆此时没有了面试宝典了，求他们排队的总数？<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h(<span class="number">3</span>)=<span class="number">6</span>!/(<span class="number">3</span>!*<span class="number">4</span>!)=<span class="number">5</span>，所以总数=h(<span class="number">3</span>)*<span class="number">3</span>!*<span class="number">3</span>!=<span class="number">180</span></span><br></pre></td></tr></table></figure></p>
-<p>参考资料：<br><a href="http://www.cnblogs.com/wuyuegb2312/archive/2013/07/16/3016878.html#code1" target="_blank" rel="noopener">http://www.cnblogs.com/wuyuegb2312/archive/2013/07/16/3016878.html#code1</a><br><a href="https://www.cnblogs.com/youxin/p/3293345.html" target="_blank" rel="noopener">https://www.cnblogs.com/youxin/p/3293345.html</a></p>
-
+            <p>
+              通项公式Catalan序列是一个整数序列，其通项公式是
+h(n)=C(2n,n)/(n+1) (n=0,1,2,...)
+其前几项为 : 1, 1, 2, 5, 14, 42, 132, 429, 1430, 4862, 16796, 58786, 208012, 742900, 2674440, 
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/08/卡特兰数/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -552,6 +593,19 @@
           
             
             
+              
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+            
+                <span class="post-meta-item-text">评论数：</span>
+                <a href="/2019/06/08/C-随机数引擎-C-11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2019/06/08/C-随机数引擎-C-11/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
           
 
           
@@ -578,12 +632,19 @@
       
         
           
-            <p>程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：<br>生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字<br>单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成的很快的话(可以for循环测试)<br>为此，需要引入C++11中的random文件，其中封装了很多优秀的随机数生成器，包括均匀分布、正态分布、泊松分布等。</p>
-<p>就拿围棋中用得最多的mt19937为例：<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">std</span>::random_device rd;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::mt19937&gt; mtEngine;</span><br><span class="line"><span class="keyword">this</span>-&gt;mtEngine = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::mt19937&gt;(rd());</span><br><span class="line">(*mtEngine)();</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConsoleApplication4.cpp : 定义控制台应用程序的入口点。</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"stdafx.h"</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;random&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;memory&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Random</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">const</span> <span class="keyword">static</span> <span class="keyword">unsigned</span> <span class="keyword">int</span> maxRand = <span class="built_in">std</span>::random_device::max();</span><br><span class="line">    <span class="function"><span class="keyword">static</span> Random&amp; <span class="title">getInstance</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">static</span> Random instance;</span><br><span class="line">        <span class="keyword">return</span> instance;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">getInteger</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (*dist)(rd);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">GetMTEngineInteger</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (*mtEngine)();</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">uint64_t</span> GetMTEngine64Integer() <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> (*mtEngine64)();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">GetRand0Integer</span><span class="params">()</span> <span class="keyword">noexcept</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (*rand0Engine)();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line">    auto GetRanlux48Integer() noexcept -&gt;decltype(auto) &#123;</span><br><span class="line">        <span class="keyword">return</span> (*ranlux48Engine)();</span><br><span class="line">    &#125;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">private</span>:</span><br><span class="line">    Random() <span class="keyword">noexcept</span> &#123;</span><br><span class="line">        mtEngine = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::mt19937&gt;(rd());</span><br><span class="line">        mtEngine64 = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::mt19937_64&gt;(rd());</span><br><span class="line">        dist = <span class="built_in">std</span>::make_shared&lt;<span class="built_in">std</span>::uniform_int_distribution&lt; <span class="keyword">unsigned</span> <span class="keyword">int</span> &gt;&gt;(<span class="built_in">std</span>::uniform_int_distribution&lt; <span class="keyword">unsigned</span> <span class="keyword">int</span> &gt;(<span class="number">0</span>, maxRand));</span><br><span class="line">        rand0Engine = make_shared&lt;<span class="built_in">std</span>::minstd_rand0&gt;(rd());</span><br><span class="line">        ranlux48Engine = make_shared&lt;<span class="built_in">std</span>::ranlux48&gt;(rd());</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">std</span>::random_device rd;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::mt19937&gt; mtEngine; <span class="comment">//32-bit Mersenne Twister by Matsumoto and Nishimura, 1998</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::mt19937_64&gt; mtEngine64; <span class="comment">//64-bit Mersenne Twister by Matsumoto and Nishimura, 2000(马特赛特旋转演算法)</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::minstd_rand0&gt; rand0Engine;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::ranlux48&gt; ranlux48Engine;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">shared_ptr</span>&lt;<span class="built_in">std</span>::uniform_int_distribution&lt; <span class="keyword">unsigned</span> <span class="keyword">int</span> &gt; &gt; dist;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetMTEngineInteger() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetMTEngine64Integer() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetRand0Integer() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().GetRanlux48Integer() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; Random::getInstance().getInteger() &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>另外random中还有一堆分布函数，感觉是从matlab移植过来的，需要的话可以参考cppreference或者下面这篇文章：<br><a href="https://zh.cppreference.com/w/cpp/header/random" target="_blank" rel="noopener">https://zh.cppreference.com/w/cpp/header/random</a><br><a href="https://blog.csdn.net/u010487568/article/details/51526337" target="_blank" rel="noopener">https://blog.csdn.net/u010487568/article/details/51526337</a></p>
-
+            <p>
+              程序中需要用到随机数的地方很多，一般C++就是用srand种子+time函数生成随机数，但是这样会有两个主要问题：生成的区间有限，什么2^15-1(32767)，什么2^31-1(2147483647)，还有一些“奇怪”的数字单位时间内生成的随机数并不随机，time并不能解决随机问题，如果随机数生成
+              ...
+            </p>
+          <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/06/08/C-随机数引擎-C-11/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
         
       
     </div>
@@ -751,15 +812,9 @@
 </div>
 
 
-  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
 
 
 
-  <span class="post-meta-divider">|</span>
-
-
-
-  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.1.2</div>
 
 
 
@@ -847,7 +902,9 @@
   
 
 
-  <script src="/js/schemes/muse.js?v=7.1.2"></script>
+  <script src="/js/affix.js?v=7.1.2"></script>
+
+  <script src="/js/schemes/pisces.js?v=7.1.2"></script>
 
 
 
@@ -866,10 +923,360 @@
   
 
   
+  
+
+<script src="//cdn1.lncld.net/static/js/3.11.1/av-min.js"></script>
+
+
+
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+
+<script>
+  var GUEST = ['nick', 'mail', 'link'];
+  var guest = 'nick,mail,link';
+  guest = guest.split(',').filter(function(item) {
+    return GUEST.indexOf(item) > -1;
+  });
+  new Valine({
+    el: '#comments',
+    verify: false,
+    notify: false,
+    appId: 'YzNXwTiUGFI1JPdHHBpBLUUY-gzGzoHsz',
+    appKey: 's2j0V6WxMtrUU0LA2JBrwCqa',
+    placeholder: '欢迎来撩',
+    avatar: 'mm',
+    meta: guest,
+    pageSize: '10' || 10,
+    visitor: false,
+    lang: 'zh-cn' || 'zh-cn'
+  });
+</script>
+
+
 
 
 
   
+  <script>
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url).replace(/\/{2,}/g, '/');
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('5');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x"></i></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x"></i></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
 
 
 
